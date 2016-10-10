@@ -9,10 +9,9 @@ const ERROR_SEARCH = 'price-it/Main/ERROR_SEARCH'
 const UPDATE_PRICES = 'price-it/Main/UPDATE_PRICES'
 const UPDATE_REFINERS = 'price-it/Main/UPDATE_REFINERS'
 const UPDATE_REFINER = 'price-it/Main/UPDATE_REFINER'
-const UPDATE_SUGGESTIONS = 'price-it/Main/UPDATE_SUGGESTIONS'
 
 //actions generators
-export const updateSearchTerm = (text) => {
+const updateSearchTerm = (text) => {
 	return {
 		type: UPDATE_SEARCH_TERM,
 		text: text
@@ -47,13 +46,6 @@ const updatePrices = (prices) => {
 	}
 }
 
-const updateSuggestions = (suggestions) => {
-	return {
-		type: UPDATE_SUGGESTIONS,
-		suggestions: suggestions,
-	}
-}
-
 const updateRefiners = (refiners) => {
 	return {
 		type: UPDATE_REFINERS,
@@ -72,16 +64,13 @@ export const updateRefiner = (index, selected) => {
 //action helpers
 export const search = (searchTerm) => {
 	return dispatch => {
+		dispatch(updateSearchTerm(searchTerm))
 		dispatch(requestSearch())
-		//make fetch request
-		//then
 		dispatch(receiveSearch())
 		let refiners = transformRefiners(refinementData)
 		dispatch(updateRefiners(refiners))
 		let prices = transformPrices(pricesData)
 		dispatch(updatePrices(prices))
-		//catch 
-		//dispatch(errorSearch())
 	}
 }
 
@@ -89,13 +78,6 @@ export const refine = (refiners) => {
 	return dispatch => {
 		dispatch(updateRefiners(refiners))
 		dispatch(getPrices())
-	}
-}
-
-export const getSuggestions = (searchTerm) => {
-	return dispatch => {
-		let suggestions = transformSuggestions(suggestionsData)
-		dispatch(updateSuggestions(suggestions))
 	}
 }
 
@@ -112,16 +94,11 @@ const main = (state={
 	prices: {},
 	refiners: [],
 	searchTerm: "",
-	suggestions: [],
 }, action={}) => {
 	switch(action.type){
 		case UPDATE_PRICES:
 			return Object.assign({}, state, {
 				prices: action.prices
-			})
-		case UPDATE_SUGGESTIONS:
-			return Object.assign({}, state, {
-				suggestions: action.suggestions
 			})
 		case UPDATE_REFINERS:
 			return Object.assign({}, state, {
@@ -160,14 +137,12 @@ const prices = state => state.prices
 const refiners = state => state.refiners
 const hasData = () => { return prices !== {} }
 const searchTerm = state => state.searchTerm
-const suggestions = state => state.suggestions
 
 export const selector = createStructuredSelector({
 	prices,
 	refiners,
 	hasData,
 	searchTerm,
-	suggestions,
 })
 
 
