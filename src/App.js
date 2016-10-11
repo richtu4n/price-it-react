@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import SearchBar from './features/main/components/SearchBar'
 import RefinementPanel from './features/main/components/RefinementPanel'
+import PriceWidget from './features/main/components/PriceWidget'
 import { getSuggestions } from './utilities/apiFunctions'
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
       <h1>Price it!</h1>
       <SearchBar onChange={ getSuggestions }/>
       <RefinementPanel />
+      <PriceWidget />
     </div>
   )
 }

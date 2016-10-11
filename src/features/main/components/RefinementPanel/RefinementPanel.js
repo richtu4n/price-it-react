@@ -4,37 +4,47 @@ import { bindActionCreators } from 'redux';
 import * as duck from '../../duck'
 import RefinerItem from './RefinerItem'
 
-const RefinementPanel = ({refiners, update}) => {
-	
-	const handleChange = (id, value) => {
-		let updatedRefiners = [...refiners]
-		updatedRefiners[id] = Object.assign({}, updatedRefiners[id], { selected: value })
-		update(updatedRefiners)
+class RefinementPanel extends React.Component {
+
+	static propTypes = {
+		searchTerm: PropTypes.string.isRequired,
+		refiners: PropTypes.array,
+		onChange: PropTypes.func,
 	}
 
-	return (
-		<div>
-			{ refiners.map((refiner, index) => {
+	static defaultProps = {
+		refiners: [],
+		onChange: (searchTerm, refiners) => {},
+	}
+
+	handleChange = (id, selected) => {
+		let updatedRefiners = this.props.refiners.map((refiner, index) => {
+			return index === id? Object.assign({}, refiner, { selected: selected }) : refiner
+		})
+		this.props.onChange(this.props.searchTerm, updatedRefiners)
+	}
+
+	render () {
+		return <div>
+			{ this.props.refiners.map((refiner, index) => {
 				return <RefinerItem 
 					key={index}
 					name={refiner.name}
 					id={index}
 					options={refiner.options}
 					selected={refiner.selected}
-					handleChange={handleChange} />
+					handleChange={this.handleChange} />
 			}) }
 		</div>
-	)
-}
-
-RefinementPanel.propTypes = {
-	refiners: PropTypes.array.isRequired,
-	update: PropTypes.func.isRequired,
+	}
 }
 
 export default connect(
-	state => duck.selector(state.main),
+	state => ({
+		searchTerm: duck.selector(state.main).searchTerm,
+		refiners: duck.selector(state.main).refiners,
+	}),
 	dispatch => ({
-		update: bindActionCreators(duck.refine, dispatch)
+		onChange: bindActionCreators(duck.refine, dispatch),
 	})
 )(RefinementPanel)
