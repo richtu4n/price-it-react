@@ -1,12 +1,18 @@
 import React, { PropTypes } from 'react'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
+import * as colors from '../../../../assets/colors'
 
 class RefinerItem extends React.Component {
 
 	styles = {
-		customWidth: {
-			width: 200,
+		select: {
+			width: '100%',
+		},
+		label: {
+			display: 'block',
+			textAlign: 'left',
+			color: colors.grey800,
 		}
 	}
 
@@ -21,18 +27,19 @@ class RefinerItem extends React.Component {
 		})
 
 		return (
-			<div>
-				<label>{this.props.name}</label>
+			<div
+				style={this.styles}>
 				<DropDownMenu 
 					value={this.props.selected} 
 					onChange={this.onChange}
-					style={this.styles.customWidth}>
+					style={this.styles.select}>
 					{options}
 				</DropDownMenu>
 			</div>
 		)
 	}
 }
+//<label style={this.styles.label}>{this.props.name}</label>
 
 RefinerItem.propTypes = {
 	name: PropTypes.string.isRequired,

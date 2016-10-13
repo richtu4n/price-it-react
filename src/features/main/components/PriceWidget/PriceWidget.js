@@ -6,7 +6,7 @@ import PriceItem from './PriceItem'
 const PriceWidget = ({ prices }) => {
 	
 	const style = {
-		marginTop: 20,
+		marginTop: 40,
 	}
 
 	return <div style={ style } >

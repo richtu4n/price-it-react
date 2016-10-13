@@ -4,7 +4,7 @@ const PriceItem = ({value}) => {
 	
 	const style = {
 		display: 'inline',
-		margin: '0 5px',
+		margin: '0 10px',
 	}
 
 	const formatCurrency = (value) => value? `£${value}` : ''

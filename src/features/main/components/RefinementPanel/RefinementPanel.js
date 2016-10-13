@@ -17,6 +17,11 @@ class RefinementPanel extends React.Component {
 		onChange: (searchTerm, refiners) => {},
 	}
 
+	styles={
+		margin: '0 20px',
+		paddingRight: 30,
+	}
+
 	handleChange = (id, selected) => {
 		let updatedRefiners = this.props.refiners.map((refiner, index) => {
 			return index === id? Object.assign({}, refiner, { selected: selected }) : refiner
@@ -25,7 +30,8 @@ class RefinementPanel extends React.Component {
 	}
 
 	render () {
-		return <div>
+		return <div
+			style={this.styles}>
 			{ this.props.refiners.map((refiner, index) => {
 				return <RefinerItem 
 					key={index}
