@@ -9,13 +9,19 @@ import { getSuggestions } from './utilities/apiFunctions'
 const App = () => {
   return (
     <div className="App">
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <div className="App-top-section">
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+        </div>
+        <div className="App-body">
+          <h1>Price it!</h1>
+          <SearchBar onChange={ getSuggestions }/>
+          <RefinementPanel />
+        </div>
       </div>
-      <h1>Price it!</h1>
-      <SearchBar onChange={ getSuggestions }/>
-      <RefinementPanel />
-      <PriceWidget />
+      <div className="App-bottom-section">
+        <PriceWidget />
+      </div>
     </div>
   )
 }

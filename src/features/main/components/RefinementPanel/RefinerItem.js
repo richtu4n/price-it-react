@@ -6,13 +6,25 @@ import * as colors from '../../../../assets/colors'
 class RefinerItem extends React.Component {
 
 	styles = {
+		display: 'flex',
 		select: {
-			width: '100%',
+			color: colors.pink800,
+			flex: 2,
+		},
+		labelContainer: {	
+			flex: 1,
+			display: 'flex',
+			alignItems: 'flex-end',
 		},
 		label: {
-			display: 'block',
-			textAlign: 'left',
 			color: colors.grey800,
+			marginRight: 'auto',
+			whiteSpace: 'nowrap',
+		},
+		custom: {
+			whiteSpace: 'nowrap',
+  			overflow: 'hidden',
+  			textOverflow: 'ellipsis',
 		}
 	}
 
@@ -29,17 +41,20 @@ class RefinerItem extends React.Component {
 		return (
 			<div
 				style={this.styles}>
+				<div style={this.styles.labelContainer}>
+					<label style={this.styles.label}>{this.props.name}</label>
+				</div>
 				<DropDownMenu 
 					value={this.props.selected} 
 					onChange={this.onChange}
-					style={this.styles.select}>
+					style={this.styles.select}
+					labelStyle={this.styles.custom}>
 					{options}
 				</DropDownMenu>
 			</div>
 		)
 	}
 }
-//<label style={this.styles.label}>{this.props.name}</label>
 
 RefinerItem.propTypes = {
 	name: PropTypes.string.isRequired,

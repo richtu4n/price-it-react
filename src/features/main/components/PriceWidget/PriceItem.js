@@ -1,16 +1,20 @@
 import React from 'react'
 
-const PriceItem = ({value}) => {
+const PriceItem = ({value, accent=false}) => {
 	
-	const style = {
+	const styles = {
 		display: 'inline',
-		margin: '0 10px',
+		margin: '10px',
+		strong: {
+			fontWeight: '600',
+			color: '#61dafb',
+		},
 	}
 
 	const formatCurrency = (value) => value? `£${value}` : ''
 
-	return !value? null : <div style={style}>
-		<span>{formatCurrency(value)}</span>
+	return <div style={styles}>
+		{ accent? <span style={styles.strong}>{formatCurrency(value)}</span>  : <span>{formatCurrency(value)}</span>  }
 	</div>
 }
 

@@ -23,6 +23,7 @@ class SearchBar extends React.Component {
 	styles = {
 		margin: '0 20px',
 		display: 'flex',
+		marginBottom: 0,
 		input: {
 		},
 		icon: {

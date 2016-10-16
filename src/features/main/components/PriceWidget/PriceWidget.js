@@ -6,12 +6,12 @@ import PriceItem from './PriceItem'
 const PriceWidget = ({ prices }) => {
 	
 	const style = {
-		marginTop: 40,
+		color: '#fff',
 	}
 
 	return <div style={ style } >
 		<PriceItem value={prices.lower} />
-		<PriceItem value={prices.median} />
+		<PriceItem accent={true} value={prices.median} />
 		<PriceItem value={prices.upper} />
 	</div>
 }

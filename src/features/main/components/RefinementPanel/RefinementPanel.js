@@ -19,7 +19,6 @@ class RefinementPanel extends React.Component {
 
 	styles={
 		margin: '0 20px',
-		paddingRight: 30,
 	}
 
 	handleChange = (id, selected) => {
